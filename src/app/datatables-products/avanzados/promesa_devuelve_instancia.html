@@ -1,0 +1,18 @@
+<div class="container">
+	
+<p>
+  <button type="button"
+          class="btn btn-warning waves-effect waves-light blue"
+          (click)="displayToConsole(datatableElement)">
+    Mostrar la instancia DataTable en la consola
+  </button>
+</p>
+
+<pre>
+	El ID de instancia de DataTable es: {{ (datatableElement.dtInstance | async)?.table().node().id }}
+</pre>
+
+<table datatable [dtOptions]="dtOptions" class="row-border hover"></table>
+
+
+</div>	

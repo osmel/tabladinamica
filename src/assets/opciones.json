@@ -1,0 +1,19 @@
+{
+  "ajax": "assets/data.json",
+  "displayLength": 2,
+  "paginationType": "full_numbers",
+  "columns": [
+          {
+            "title": "Nombre",
+            "data": "name"
+          }, {
+            "title": "correo",
+            "data": "email"
+          }, {
+            "title": "edad",
+            "data": "age",
+            "visible": false
+          }    
+    
+  ]
+}

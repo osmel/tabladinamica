@@ -15,19 +15,20 @@ import { Subject } from 'rxjs/Rx';
   selector: 'app-datatables-products',
   templateUrl: './datatables-products.component.html'
   //styleUrls: ['./datatables-products.component.css'],
-  //template: './datatables-products.component.html' 
+  //template: './datatables-products.component.html'
 })
-export class DatatablesProductsComponent implements OnInit { 
-	persons: Personas[] = [];
-	dtTrigger: Subject<Personas> = new Subject();
-	dtOptions: DataTables.Settings = {};
+export class DatatablesProductsComponent implements OnInit {
+	 persons: Personas[] = [];
+	 dtTrigger: Subject<Personas> = new Subject();
+	 dtOptions: DataTables.Settings = {};
+
   constructor(private _http:HttpClient) { }   //private _http: HttpClient
 
 
 	   ngOnInit(): void {
-	   	
-   				this.dtOptions = {
-		 			pagingType: 'full_numbers',
+
+				this.dtOptions = {
+		 		pagingType: 'full_numbers',
 					language: {  //tratamiento de lenguaje
 						"lengthMenu": "Mostrar _MENU_ registros por página",
 						"zeroRecords": "No hay registros",
@@ -53,25 +54,16 @@ export class DatatablesProductsComponent implements OnInit {
 					},
 					//displayLength: 2
 			    };  //fin de las opciones	   	
-
-
-
-				  //this._http.post("http://localhost/tabladinamica/data/tabla.php",'From an Input field')
-				  this._http.post<Personas>("http://localhost/tabladinamica/data/tabla.php","datoxxx")
+   	
+				  this._http.get<Personas>("assets/data.json",{observe: 'response'})
 			      .subscribe(datos => {
-			    	    //console.log(datos );
-			          	for (let key$ in datos.data ) {
-			          		//for (let midata$ in datos ) {
-			          			console.log(datos.data[key$]);
-			          			
-			  			 	//console.log(datos.data[key$]);
-			  			 	this.persons.push(datos.data[key$]); 
-			  				 //}
-			  			}
-			  	
+			    	   // console.log(datos.body.data[0] || {} );
+			          	for (let key$ in datos.body.data) {
+			  			 	console.log(datos.body.data[key$]);
+			  			 	this.persons.push(datos.body.data[key$]); 
+			  			 }
 
 			       this.dtTrigger.next();
-			       
 
 			      });
 		}
